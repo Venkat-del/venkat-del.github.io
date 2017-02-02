@@ -1,0 +1,242 @@
+/**********************************************
+
+(c) DUPress | 2016
+Author: Alok Pepakayala
+***********************************************/
+@import 'normalize';
+@mixin noSelect(){
+    user-select: none!important;
+    -moz-user-select: none!important;
+    -webkit-user-select: none!important;
+    -o-user-select: none!important;
+    -ms-user-select: none!important;
+    -moz-user-select: none!important;
+    -webkit: none!important
+}
+
+
+
+
+*, *:after,*:before{
+	box-sizing: border-box;
+
+  //For iOS tap glitch fix
+  -webkit-tap-highlight-color:transparent;
+}
+
+
+svg{
+  overflow: visible !important;
+}
+
+html,body{
+  background-color: #ffffff;
+	font-family: 'Open Sans', sans-serif;
+	//@include noSelect;
+}
+@media (min-width: 600px) {
+}
+
+#App{
+  //for embed crop issue
+  overflow: hidden;
+}
+//GENERAL LINK STYLE
+a,a:hover,a:active,a:visited{text-decoration: none;color: inherit;}
+
+//Nav temp styles
+.nav{
+  color:#fff !important;
+  display:inline-flex;
+  justify-content:center;
+  align-items:center;
+  width:22px;
+  height:22px;
+  font-size:12px;
+  margin:2px 2px;
+  background-color: #00AAE7;
+  &:hover{
+    background-color: #0076A8;
+  }
+}
+.activeNav{
+  background-color: #012169 !important;
+}
+.navArrow{color:#fff !important;
+  display:inline-flex;
+  justify-content:center;
+  align-items:center;
+  width:55px;
+  height:22px;
+  font-size:12px;
+  margin:2px 2px;
+  background-color: #97999B;
+  &:hover{
+    background-color: #53565A;
+  }
+}
+
+//Axis styling
+.axis .domain{
+  stroke-width: 1px;
+  stroke: #bbbcbc;
+}
+.yaxis .domain,.y2axis .domain{
+  stroke: none;
+}
+.axisLabel{
+    fill:#53565A;
+}
+.tick{
+  line{
+    display: none;
+  } 
+  text{
+    fill:#53565A;
+    font-size: 12px;
+    font-weight: 600;
+    font-family: 'Open Sans', sans-serif;
+  }
+}
+//Mobile
+.Credit{
+    font-size:10px;
+    line-height:12px;
+}
+//Desktop
+@media (min-width: 650px) {
+  .Credit{
+      font-size:14px;
+      line-height:22px;
+  }
+  .tick{ 
+    text{
+      font-size: 16.5px;
+    }
+  }
+}
+//Tooltip element
+#tooltip{
+  position: absolute;
+  background-color: #53565A;
+  color:#fff;
+  padding:8px;
+  width: 200px;
+  max-width: 200px;
+  pointer-events:none;
+  transform:translate(-50%,-100%);
+  opacity: 0;
+}
+#tooltip:after{
+  top: 100%;
+  left: 50%;
+  border: solid transparent;
+  content: " ";
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
+}
+
+#tooltip:after {
+  border-color: transparent;
+  border-top-color: #53565A;
+  border-width: 12px;
+  margin-left: -12px;
+}
+.rightPointer#tooltip:after{
+  transform:translate(88px,0)
+}
+.leftPointer#tooltip:after{
+  transform:translate(-88px,0)
+}
+//Line chart
+.path{
+  stroke-width:3px;
+  fill:none;
+}
+
+
+
+
+//Legend styling
+.Legend{
+  margin-left: 70px;
+  margin-right: 8px;
+  position: relative;
+
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  //border:2px solid red;
+}
+.legendItem{
+  display: inline-block;
+  position: relative;
+  vertical-align: top;
+  font-size: 14.5px;
+  font-weight: 400;
+  margin: 4px;
+  color: #53565A;
+
+  flex-grow:32%;
+  flex-basis:32%;
+  //border:2px solid blue;
+}
+.legendShape{
+  &.block{
+    top: 8px;
+    left: 17px;
+    width:16px;
+    height: 16px;
+  }
+  &.dotted{
+    top: 16px;
+    left: 6px;
+    width:30px;
+    height: 18px;
+    background-color: transparent !important;
+    border-top: 2px dashed;
+  }
+  &.solid{
+    top: 16px;
+    left: 6px;
+    width:30px;
+    height: 18px;
+    background-color: transparent !important;
+    border-top: 2px solid;
+  }
+  position: absolute;
+  display: inline-block;
+
+  //border:2px solid green;
+}
+.legendName{
+  margin-top: 5px;
+  margin-bottom: 5px;
+  margin-left: 40px;
+  margin-right: 12px;
+  text-align: left;
+  
+  //border:2px solid orange;
+}
+
+//Mobile
+@media (max-width: 600px) {
+  .Legend{
+    margin-left: 8px;
+    margin-right: 8px;
+  }
+  .legendItem{
+    min-width: 48%;
+    margin: 2px;
+  }
+}
+
+
+//Vertical bar chart styling
+.vTitle{
+  font-size: 16px;
+  font-weight: 600;
+  fill:#53565A;
+}
