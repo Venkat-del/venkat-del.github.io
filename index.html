@@ -9,6 +9,11 @@
 </script>
 <script src="js/jquery-ui.js">
 </script>
+<script src="js/saveaspng.js">
+</script>
+<script src="js/figure1.js">
+</script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/annyang/2.6.0/annyang.min.js"></script>
 <link rel="stylesheet" href=
 "//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 <link rel="stylesheet" href="css/jquery-ui.css">
@@ -16,33 +21,11 @@
 <link rel="stylesheet" href="css/styles_side.css">
 <link rel="stylesheet" href="css/chart.css">
 
+
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.1/css/bootstrap-select.min.css">
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.1/js/bootstrap-select.min.js"></script>
-<script src="data/figure1.js">
-</script>
-<script src="data/figure3.js">
-</script>
-<script src="data/figure2.js">
-</script>
-<script src="data/figure4.js">
-</script>
-<script src="data/figure5.js">
-</script>
-<script src="data/figure6.js">
-</script>
-<script src="data/figure7.js">
-</script>
-<script src="data/figure7a.js">
-</script>
-<script src="data/figure8.js">
-</script>
-<script src="data/figure9.js">
-</script>
-<script src="data/figure9a.js">
-</script>
-<script src="data/figure10.js">
-</script>
+
 </head>
 <body>
 <div id="wrapper">
@@ -73,6 +56,8 @@ navigation</span></button></div>
 <div class="collapse navbar-collapse" id=
 "bs-sidebar-navbar-collapse-1">
 <ul class="nav navbar-nav">
+
+  <li><a href="#" onclick="home_page()">Home</a></li>
   <li class="active"><a href="#" onclick="plot_stacked('Shift Index')">Shift Index Overview</a></li>
 <li class="dropdown" id = "sngl-chrt"><a href="#" class="dropdown-toggle">Single Charts</a>
 <ul class="dropdown-menu forAnimate" role="menu">
@@ -83,7 +68,6 @@ Index</a></li>
 </ul>
 </li>
 <li><a href="#" onclick="load_comp()">Comparison Charts</a></li>
-
 </ul>
 </div>
 </div>
@@ -214,6 +198,12 @@ Index</a></li>
 
 <div class="chart-wrapper">
 <div class="chart-area col-lg-8 col-md-8">
+  <div class="downico">
+    <img  class="dl-csv" title="Download raw data" src="images/Download_POS.ico" width="30px" height="30px" onclick="downloadFile('csv')" />
+    <img  title="Download Screenshot" src="images/Picture_POS.ico" width="30px" height="30px" onclick="downloadFile('svg')" />
+
+  </div>
+
   <div id="App1">
     <div id = "seq">
 
@@ -221,6 +211,9 @@ Index</a></li>
     <svg id="chrt-ovrvw">
 
   </svg>
+
+</div>
+<div id = "home" style="width:100%">
 
 </div>
 
@@ -294,13 +287,16 @@ Index</a></li>
 </script>
 <script src="js/script_gp.js">
 </script>
-<script src="stacked_bar.js">
+<script src="js/stacked_bar.js">
 
 </script>
 <script src="js/data_load.js">
 </script>
 <script src="js/script.js">
 </script>
+
+
+</body>
 <script type="text/javascript">
 (function() {
 var s = document.createElement("script");
@@ -312,5 +308,4 @@ var x = document.getElementsByTagName('script')[0];
 x.parentNode.insertBefore(s, x);
 })();
 </script>
-</body>
 </html>

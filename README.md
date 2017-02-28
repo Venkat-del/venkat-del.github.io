@@ -1,1 +1,0 @@
-# venkat-del.github.io

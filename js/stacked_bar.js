@@ -43,6 +43,7 @@ function updateBreadcrumbs(nodeArray, percentageString) {
 	// Add breadcrumb and label for entering nodes.
 	var entering = g.enter().append("svg:g")
 									.attr("transform", function(d, i) {
+
 														return "translate(" + i * (b.w + b.s) + ", 10)";
 													})
 									.attr("value", function(d, i) {
@@ -74,7 +75,7 @@ g.exit().remove();
 function initializeBreadcrumbTrail() {
 // Add the svg area.
 var trail = d3.select("#seq").append("svg:svg")
-	.attr("width", width)
+	.attr("width", $('#App1').width() - margin.left - margin.right)
 	.attr("height", 50)
 	.attr("id", "trail");
 // Add the label at the end, for the percentage.
@@ -97,11 +98,15 @@ points.push(b.t + "," + (b.h / 2));
 }
 return points.join(" ");
 }
-
+f_name=""
 data_list = ["Shift Index","Foundation","Flow","Impact","Technology Performance","Infrastructure Penetration","Public Policy","Economic Freedom","Physical Flows","Virtual Flows","Flow Amplifiers","Market","People","Firms"]
 data_list_new = ["Shift Index","Foundation","Flow","Impact","Public Policy"]
 color_list ={"Foundation":"#ED8B00","Flow":"#005587","Impact":"#009A44","Technology Performance":"#ED8B00","Infrastructure Penetration": "#005587","Public Policy":"#009A44","Economic Freedom":"#ED8B00","Physical Flows":"#ED8B00","Virtual Flows": "#005587","Flow Amplifiers":"#009A44","Market":"#ED8B00","People": "#005587","Firms":"#009A44","Business Freedom":"#ED8B00","Trade Freedom ":"#005587","Fiscal Freedom":"#009A44","Gov't Size":"#FFCD00","Monetary Freedom":"#E3E48D","Investment Freedom":"#0097A9","Financial Freedom":"#00A3E0","Property Rights": "#75787B","Freedom from Corruption ": "#004F59","Labor Freedom":"#005587",'Wireless Subscriptions':"#ED8B00",'Internet Users':"#005587","Computing":"#ED8B00","Digital Storage":"#005587","Bandwidth":"#009A44","Inter-Firm Knowledge Flows":"#ED8B00","Internet Activity":"#005587","Migration of People to Creative Cities":"#ED8B00","Travel Volume":"#005587","Movement of Capital":"#009A44","Worker Passion":"#ED8B00","Social Media Activity":"#005587","Competitive Intensity":"#ED8B00","Labor Productivity":"#005587","Stock Price Volatility":"#009A44","Asset Profitability":"#ED8B00","ROA Performance Gap":"#005587","Firm Topple Rate":"#009A44","Shareholder Value Gap":"#FFCD00","Consumer Power":"#ED8B00","Brand Disloyalty":"#005587","Returns to Talent":"#009A44","Executive Turnover":"#FFCD00"}
 var plot_stacked= function(name){
+	f_name = name+".csv"
+	figure=[]
+	curr = "overview"
+
 	if(seq_list.indexOf(name) < 0){
 	seq_list.push(name)
 }else{
@@ -125,9 +130,11 @@ var plot_stacked= function(name){
   		that.tooltip.classed('leftPointer',false);
 
   	}
+			ky = ""
       that.tooltip.html("")
-      //console.log(d.);
-  		that.tooltip.html(d.key)
+			lst = ["Flow","Foundation","Impact"]
+
+  		that.tooltip.html("Value:" +(d[1]-d[0]).toFixed(2)+"</br>Year: "+d.data.State+"</br>"+"Total: "+d.data.total)
   	//Position the tooltip and display it
       that.tooltip
           .style("opacity", 0.95)
@@ -156,9 +163,14 @@ d3.select("#App1").style("display","block")
 d3.select(".stacked-chart-menu").style("display","block")
 d3.select(".chart-area").style("width","98%")
 d3.select(".chart-area").style("height","100%")
-var width =  $('#App1').width() - margin.left - margin.right-150,
+d3.select(".main").style("height","80%")
+
+d3.select(".downico").style("display","block")
+d3.select("#home").style("display","none")
+var width =  $('#App1').width() - margin.left - margin.right-120,
     height = $(".chart-area").height()- margin.top - margin.bottom-50
 var svg = d3.select("#chrt-ovrvw").attr("width",width).attr("height",height)
+svg.selectAll("*").remove()
 g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 var x = d3.scaleBand()
@@ -180,7 +192,7 @@ var z = d3.scaleOrdinal()
       var stack = d3.stack();
 var updateStacked = function(name){
 d3.csv("/data/overview/"+name+".csv", type, function(error, data) {
-	//console.log(data);
+	current_data = data
   if (error) throw error;
 
   data.sort(function(a, b) { return a.State - b.State; });
@@ -191,6 +203,7 @@ d3.csv("/data/overview/"+name+".csv", type, function(error, data) {
 		Object.keys(d).filter(function(k){if (filt_list.indexOf(k) < 0) {	p[k] = d[k];return d[k]
 
 	}})
+
 	sub_data.push(p)
 	//console.log(d.filter(function(k){console.log(k);}));
 	;})
@@ -210,8 +223,7 @@ d3.csv("/data/overview/"+name+".csv", type, function(error, data) {
       .attr("class", "serie")
       .attr("fill", function(d) { return color_list[d.key]; })
       .on("click",function(d) { if(data_list.indexOf(d.key)>=0){return initializeStack(d.key)} })
-      .on("mousemove", tooltipTypeAShow)
-      .on("mouseout", tooltipTypeAHide)
+
     bar_g.selectAll("rect")
     .data(function(d) { return d; })
     .enter().append("rect")
@@ -219,6 +231,8 @@ d3.csv("/data/overview/"+name+".csv", type, function(error, data) {
       .attr("y", function(d) { return y(d[1]); })
       .attr("width", x.bandwidth()- x.bandwidth()/3)
       .attr("height", function(d) { return 0; })
+			.on("mousemove", tooltipTypeAShow)
+      .on("mouseout", tooltipTypeAHide)
       .transition()
       .duration(500)
       .attr("height", function(d) { return y(d[0]) - y(d[1]); })

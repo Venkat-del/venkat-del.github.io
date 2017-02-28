@@ -1,5 +1,6 @@
+current_data = []
 var read_data = function(name,chart_type,st_yr,trnd){
-  console.log(name);
+  curr="single"
   $("#chrt-opt").show()
     $("#chrt-opt1").html("")
     //$(".main").html(foundation)
@@ -19,7 +20,7 @@ The metrics in the Foundation Index provide leading indicators for potential cha
   d3.csv("full_data.csv", function(error, data) {
     if (error) throw error;
     data_sub = data.filter(function(d) {return d["ID Code"]==name;})
-
+    current_data = data_sub;
     year_data = $.each(data_sub,function(key,value){
       $.each(value,function(key1,value1){
         if(Number(key1) >= st_yr & Number(key1) <= 2015){
@@ -51,7 +52,6 @@ The metrics in the Foundation Index provide leading indicators for potential cha
 figure.config.yRange = [min,max];
 figure.config.legendComponent=[]
 figure.config.legendComponent.push({color:"#00B5AF"})
-console.log([min,max]);
 plotchart(figure)
 }
 )
@@ -60,7 +60,7 @@ plotchart(figure)
 
 
 var read_data_comp = function(name1,name2,chart_type,st_yrl,st_yrr,trnd){
-
+  curr = "comparison"
     //$(".main").html(foundation)
   chart_id = name
   figure = []

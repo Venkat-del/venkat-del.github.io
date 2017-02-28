@@ -302,18 +302,18 @@ Script.resizeChart = function(sizeObj,animate){
 
 		//Axis
 		that.g.select(".xaxis")
-			  .attr("transform", "translate(0," + (that.height + 0) + ")")
+			  .attr("transform", "translate(0," + (y(that.item.config.xRaise)+ 0) + ")")
 			  .transition().duration(animate?DUR:0)
 			  .call(
 			  	d3.axisBottom(x)
 			  	  .tickSizeOuter(0)
-			  	  .tickPadding(6)
-			  	  .tickFormat(tickXformater))
-						.selectAll("text")
-						.style("text-anchor", "start")
-						.attr("x", 1)
-						.attr("y",(start_year-2015)/7)
-						.attr("transform", "rotate(90)" );
+			  	  .tickFormat(tickXformater)
+						)
+				.selectAll("text")
+				.style("text-anchor", "start")
+				.attr("x",that.height-y(0)+5 )
+				.attr("y",-5)
+				.attr("transform", "rotate(90)" );
 		that.g.select(".yaxis")
 			  .transition().duration(animate?DUR:0)
 			  .call(
@@ -334,6 +334,7 @@ Script.resizeChart = function(sizeObj,animate){
 				     //.curve(d3.curveMonotoneX);
 		that.g.select('.line')
 			  .transition().duration(animate?DUR:0)
+				.attr("transform", "translate(7,0)")
 		      .attr("stroke",function(d){return that.item.config.legend[that.item.config.y]})
 		      .attr("d", line)
 
@@ -343,6 +344,7 @@ Script.resizeChart = function(sizeObj,animate){
 			.attr('fill',function(d){return that.item.config.legend[that.item.config.y]})
 			.attr('stroke',function(d){return that.item.config.legend[that.item.config.y]})
 			.attr('stroke-width','16px')
+			.attr("transform", "translate(7,0)")
 			.attr('stroke-opacity',function(d){ if(d.marker){return 0.3;}else{return 0;}})
 			.attr('cx',function(d) { return mGZ(x(d[that.item.config.x])); })
 	        .attr('cy',function(d) { return mGZ(y(d[that.item.config.y])); })
@@ -453,10 +455,12 @@ Script.resizeChart = function(sizeObj,animate){
 
 		that.g.select('.line')
 			  .transition().duration(animate?DUR:0)
+				.attr("transform", "translate(7,0)")
 		      .attr("stroke",function(d){return that.item.config.legend[that.item.config.yl]})
 		      .attr("d", line)
 		that.g.select('.line2')
 			  .transition().duration(animate?DUR:0)
+				.attr("transform", "translate(7,0)")
 		      .attr("stroke",function(d){return that.item.config.legend[that.item.config.yr]})
 		      .attr("d", line2)
 
@@ -471,6 +475,7 @@ Script.resizeChart = function(sizeObj,animate){
 	        .attr('cy',function(d) { return mGZ(y(d[that.item.config.yl])); })
 	        .transition().duration(animate?DUR:0)
 			.attr('r',(sizeObj.width <= mobileThreshold)?2.1:3.2)
+			.attr("transform", "translate(7,0)")
 		that.g.selectAll('.R.bubbles')
 			.attr('r','0')
 			.attr('fill',function(d){return that.item.config.legend[that.item.config.yr]})
@@ -481,6 +486,7 @@ Script.resizeChart = function(sizeObj,animate){
 	        .attr('cy',function(d) { return mGZ(y2(d[that.item.config.yr])); })
 	        .transition().duration(animate?DUR:0)
 			.attr('r',(sizeObj.width <= mobileThreshold)?2.1:3.2)
+			.attr("transform", "translate(7,0)")
 		var legend =that.g.selectAll(".legend")
 	     .data(that.item.config.legendComponent)
 	     .enter().append("g")
@@ -862,6 +868,7 @@ Script.resizeChart = function(sizeObj,animate){
      .y1(function(d) { return mGZ(y(d[that.item.config.y]));});
 	that.g.select('.area')
 			.transition().duration(animate?DUR:0)
+			.attr("transform", "translate(7,0)")
 			.style('fill',function(d){return that.item.config.legend[that.item.config.y]})
 				.attr("stroke",function(d){return that.item.config.legend[that.item.config.y]})
 				.attr("d", area)
@@ -876,6 +883,7 @@ Script.resizeChart = function(sizeObj,animate){
 		.attr('cx',function(d) { return mGZ(x(d[that.item.config.x])); })
 				.attr('cy',function(d) { return mGZ(y(d[that.item.config.y])); })
 				.transition().duration(animate?DUR:0)
+		.attr("transform", "translate(7,0)")
 		.attr('r',(sizeObj.width <= mobileThreshold)?2.1:3.2)
 
 

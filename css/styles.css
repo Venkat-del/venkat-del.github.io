@@ -2,6 +2,13 @@
 body {
   font-family: 'Open Sans', sans-serif;
 }
+.downico{
+  position: absolute;
+  top: 3%;
+  right:4%;
+  cursor: pointer;
+}
+
 #wrapper{
   height: 100%;
   width: 98%;
@@ -36,6 +43,14 @@ body {
 .main{
   height: 80%;
 }
+#App{
+  padding-top: 40px;
+}
+#home ul{
+  text-decoration: none;
+  list-style: none;
+}
+
 .chart-wrapper{
   height: 98%;
   margin-top: 1%;
