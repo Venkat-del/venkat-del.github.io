@@ -738,25 +738,29 @@ comparison1 = `
 home =`<h1> Shift Index Analytics Platform</h1>
 <ol>
 <li>
-<p> This workbook contains underlying indicator data for the Shift Index and allows the user  to  create charts and export for use by Deloitte graphics team.
+<p> This workbook contains underlying indicator data for the Shift Index and allows the user  to  view the charts and download them
 </p>
 </li>
 <li>
 <p> The entire dashboard is categorized into three main groups
     <ol>
-    <li>  Shift Index Overview</li>
-    <li>  Individual Metrics</li>
-    <li>  Comparison charts</li>
+    <li>  Shift Index Overview: Presents the higher level representation of the index values for all the categories</li>
+    <li>  Individual Metrics: Users can browse through the individual metrics which are preloaded</li>
+    <li>  Comparison charts: Provides the option to compare between any two metrics</li>
     </ol>
     </p>
     </li>
     </br>
     <li>
-The dashboard provides the user with the option of selecting the type and from the start of the time line
+The dashboard provides the user with the option of selecting the type and the start year for the time series as well
 </li>
 </br>
 <li>
-Users are provides with the option of downloading the data as well as the snapshot of the chart
+Users are provides with the option of downloading the data along the snapshot of the chart
+</li>
+</br>
+<li>
+Trend line option is provided for the individual charts
 </li>
 </br>
 <li>
